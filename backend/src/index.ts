@@ -2,6 +2,8 @@
 import express from 'express';
 // Importacion de las rutas
 import authRoutes from './routes/auth.routes';
+import postsRoutes from './routes/posts.routes';
+import commentsRoutes from './routes/comments.routes';
 
 // Creacion de la aplicacion express
 const app = express();
@@ -12,6 +14,8 @@ app.use(express.urlencoded({ extended: false }));
 
 // Uso de las rutas
 app.use(authRoutes);
+app.use(postsRoutes);
+app.use(commentsRoutes);
 
 // Definicion del puerto
 const PORT = 3000;
