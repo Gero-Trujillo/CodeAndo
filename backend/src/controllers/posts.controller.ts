@@ -1,46 +1,68 @@
+// Importacion de la conexion a la base de datos
 import { pool } from "../db";
+// Importacion de Request y Response de express
 import { Request, Response } from "express";
 
-export const getPosts = async (req: Request, res: Response) => {
-    try {
-      const [rows] = await pool.query("SELECT * FROM posts");
-      if ((rows as any[]).length > 0) {
-        res.json(rows);
-      } else {
-        res.status(404).json({ message: "No posts found" });
-      }
-    } catch (error) {
-      res.status(500).json({ message: "Internal server error" });
-    }
-  };
+// Funciones de los controladores (CRUD)
 
+// Obtener todos los posts
+export const getPosts = async (req: Request, res: Response) => {
+  try {
+    // Consulta a la base de datos
+    const [rows] = await pool.query("SELECT * FROM posts");
+    // Respuesta de la API
+    if ((rows as any[]).length > 0) {
+      // Si hay posts
+      res.json(rows);
+    } else {
+      // Si no hay posts
+      res.status(404).json({ message: "No posts found" });
+    }
+  } catch (error) {
+    // Error en el servidor
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+// Obtener un post
 export const getPost = async (req: Request, res: Response) => {
   try {
+    // Consulta a la base de datos
     const [rows] = await pool.query("SELECT * FROM posts WHERE id = ?", [
       req.params.id,
     ]);
+    // Respuesta de la API
     res.json(rows);
   } catch (error) {
+    // Error en el servidor
     res.status(500).json({ message: "Internal server error" });
   }
 };
 
+// Crear un post
 export const createPost = async (req: Request, res: Response) => {
   try {
+    // Consulta a la base de datos
     const [rows] = await pool.query("INSERT INTO posts SET ?", req.body);
+    // Respuesta de la API
     res.json({ message: "Post created successfully" });
   } catch (error) {
+    // Error en el servidor
     res.status(500).json({ message: "Internal server error" });
   }
 };
 
+// Eliminar un post
 export const deletePost = async (req: Request, res: Response) => {
   try {
+    // Consulta a la base de datos
     const [rows] = await pool.query("DELETE FROM posts WHERE id = ?", [
       req.params.id,
     ]);
+    // Respuesta de la API
     res.json({ message: "Post deleted successfully" });
   } catch (error) {
+    // Error en el servidor
     res.status(500).json({ message: "Internal server error" });
   }
 };
