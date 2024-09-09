@@ -2,6 +2,9 @@
 import { Request, Response } from "express";
 // Importacion de la conexion a la base de datos
 import { pool } from "../db";
+// Importacion de la funcion para crear el token de acceso
+import { createAccessToken } from "../libs/jwt";
+
 // Definicion de la interfaz de usuario
 interface UserAuth {
   username: string;
@@ -47,6 +50,10 @@ export const login = async (
     if ((rows as any[]).length === 0) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
+    // Creacion del token de acceso
+    const token = await createAccessToken({ username });
+    // Envio del token en la respuesta
+    res.cookie("accessToken", token, { httpOnly: true });
     // Respuesta de exito
     return res.status(200).json({ message: "User logged in successfully" });
   } catch (error) {
