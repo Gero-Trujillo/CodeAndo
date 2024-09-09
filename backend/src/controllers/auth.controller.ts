@@ -61,3 +61,16 @@ export const login = async (
     return res.status(500).json({ message: "Error" });
   }
 };
+
+// Definicion de la funcion de logout
+export const logout = async (req: Request, res: Response) => {
+  try {
+    // Eliminacion de la cookie del token de acceso
+    res.clearCookie("accessToken");
+    // Respuesta de exito
+    return res.status(200).json({ message: "User logged out successfully" });
+  } catch (error) {
+    // Respuesta de error
+    return res.status(500).json({ message: "Error" });
+  }
+};
