@@ -3,11 +3,44 @@ import { motion, AnimatePresence } from "framer-motion";
 
 function Register() {
   const [isLogin, setIsLogin] = useState(true);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [country, setCountry] = useState("");
+  const [error, setError] = useState("");
   const handleLogin = () => setIsLogin(!isLogin);
   const variants = {
     hidden: { opacity: 0, y: 200 },
     visible: { opacity: 1, y: 0 },
     exit: { opacity: 0, y: -200 },
+  };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+
+    const url = isLogin
+      ? "http://localhost:3000/login"
+      : "http://localhost:3000/register";
+    const payload = { username, password, country };
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error en la solicitud");
+      }
+
+      const data = await response.json();
+      console.log("Respuesta de la API:", data);
+    } catch (error) {
+      setError("Error en la autenticación. Por favor, inténtalo de nuevo.");
+      console.error("Error:", error);
+    }
   };
   return (
     <>
@@ -46,13 +79,21 @@ function Register() {
                     className="outline-none p-2 rounded-md bg-[#edfefd]"
                     type="text"
                     placeholder="Enter your username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                   />
                   <input
                     className="outline-none p-2 rounded-md bg-[#edfefd]"
                     type="password"
                     placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
-                  <button className="border-2 py-2 px-6 text-[#edfefd] transition-all duration-300 ease-in hover:bg-[#16bcc4] border-[#16bcc4]">
+                  <button
+                    className="border-2 py-2 px-6 text-[#edfefd] transition-all duration-300 ease-in hover:bg-[#16bcc4] border-[#16bcc4]"
+                    type="submit"
+                    onClick={handleSubmit}
+                  >
                     Sing In
                   </button>
                 </form>
@@ -79,18 +120,28 @@ function Register() {
                     className="outline-none p-2 rounded-md bg-[#edfefd]"
                     type="text"
                     placeholder="Enter your username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                   />
                   <input
                     className="outline-none p-2 rounded-md bg-[#edfefd]"
                     type="text"
                     placeholder="Enter your country"
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
                   />
                   <input
                     className="outline-none p-2 rounded-md bg-[#edfefd]"
                     type="password"
                     placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
-                  <button className="border-2 py-2 px-6 text-[#edfefd] transition-all duration-300 ease-in hover:bg-[#16bcc4] border-[#16bcc4]">
+                  <button
+                    className="border-2 py-2 px-6 text-[#edfefd] transition-all duration-300 ease-in hover:bg-[#16bcc4] border-[#16bcc4]"
+                    type="submit"
+                    onClick={handleSubmit}
+                  >
                     Sing Up
                   </button>
                 </form>
