@@ -1,5 +1,7 @@
 // Importacion de express
 import express from 'express';
+//Importacion de CORS
+import cors from 'cors';
 // Importacion de las rutas
 import authRoutes from './routes/auth.routes';
 import postsRoutes from './routes/posts.routes';
@@ -9,6 +11,7 @@ import commentsRoutes from './routes/comments.routes';
 const app = express();
 
 // Middlewares
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
