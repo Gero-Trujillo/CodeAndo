@@ -1,8 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import HomePage from "./HomePage";
+import AuthPage from "./AuthPage";
 ---
 
 <Layout title="CodeAndo">
-  <HomePage />
+  <AuthPage client:load/>
 </Layout>
