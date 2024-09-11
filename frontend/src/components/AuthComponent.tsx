@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { loginRequest, registerRequest } from "../api/auth";
 
 function Register() {
   const [isLogin, setIsLogin] = useState(true);
@@ -16,32 +17,20 @@ function Register() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-
-    const url = isLogin
-      ? "http://localhost:3000/login"
-      : "http://localhost:3000/register";
     const payload = { username, password, country };
-
+    let res: any;
     try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) {
-        throw new Error("Error en la solicitud");
+      if (isLogin) {
+        res = await loginRequest(payload);
+      } else {
+        res = await registerRequest(payload);
       }
-
-      const data = await response.json();
-      console.log("Respuesta de la API:", data);
-    } catch (error) {
-      setError("Error en la autenticación. Por favor, inténtalo de nuevo.");
-      console.error("Error:", error);
+      console.log(res);
+    } catch (err: any) {
+      setError(err.response.data.message);
     }
   };
+
   return (
     <>
       <AnimatePresence mode="wait">
@@ -167,5 +156,4 @@ function Register() {
     </>
   );
 }
-
 export default Register;
