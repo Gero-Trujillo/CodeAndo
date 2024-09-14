@@ -6,30 +6,49 @@ function CreatePost() {
   const [message, setMessage] = useState("");
   const [userId, setUserId] = useState<number | null>(null);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedUserId = Cookies.get("userId");
-      if (storedUserId) {
-        setUserId(Number(storedUserId));
-      }
+    const storedUserId = localStorage.getItem("userId");
+
+    console.log("User ID:", storedUserId);
+
+    if (storedUserId) {
+      setUserId(Number(storedUserId));
+    } else {
+      console.error("User ID not found in cookies");
+      setError("User ID not found. Please log in.");
     }
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setSuccess("");
+
     if (userId === null) {
-      setError("User ID is not available");
+      console.error("User ID is not available");
+      setError("User ID is not available. Please log in.");
       return;
     }
+
+    if (!message.trim()) {
+      setError("Please enter a message");
+      return;
+    }
+
     const payload = { message, userId };
     try {
       const res = await createPost(payload);
       setMessage("");
+      setSuccess("Post created successfully!");
       console.log(res);
     } catch (err: any) {
-      setError(err.response.data.message);
+      console.error("Error creating post:", err);
+      setError(
+        err.response?.data?.message ||
+          "An error occurred while creating the post"
+      );
     }
   };
 
