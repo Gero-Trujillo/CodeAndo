@@ -43,9 +43,9 @@ export const getPost = async (req: Request, res: Response) => {
 export const createPost = async (req: Request, res: Response) => {
   try {
     // Datos del body
-    const { message, userId } = req.body;
+    const { message, userId, username } = req.body;
     // Consulta a la base de datos
-    const [rows] = await pool.query("INSERT INTO posts (message, userId) VALUES(?,?)", [message, userId]);
+    const [rows] = await pool.query("INSERT INTO posts (message, userId, username) VALUES(?,?,?)", [message, userId, username]);
     // Respuesta de la API
     res.json({ message: "Post created successfully" });
   } catch (error) {

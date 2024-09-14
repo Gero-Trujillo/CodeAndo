@@ -54,7 +54,7 @@ export const login = async (
     const token = await createAccessToken({ username });
     // Envio del token en la respuesta
     res.cookie("accessToken", token, { httpOnly: true });
-    res.json(userId);
+    res.json([userId, username]);
   } catch (error) {
     // Respuesta de error
     return res.status(500).json({ message: "Error" });
