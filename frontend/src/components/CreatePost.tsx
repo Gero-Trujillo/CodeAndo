@@ -5,11 +5,13 @@ import { createPost } from "../api/posts";
 function CreatePost() {
   const [message, setMessage] = useState("");
   const [userId, setUserId] = useState<number | null>(null);
+  const [username, setUsername] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
+    const storedUsername = localStorage.getItem("username");
 
     console.log("User ID:", storedUserId);
 
@@ -18,6 +20,9 @@ function CreatePost() {
     } else {
       console.error("User ID not found in cookies");
       setError("User ID not found. Please log in.");
+    }
+    if(storedUsername){
+      setUsername(storedUsername);
     }
   }, []);
 
@@ -37,12 +42,13 @@ function CreatePost() {
       return;
     }
 
-    const payload = { message, userId };
+    const payload = { message, userId, username };
     try {
       const res = await createPost(payload);
       setMessage("");
       setSuccess("Post created successfully!");
       console.log(res);
+      window.location.reload();
     } catch (err: any) {
       console.error("Error creating post:", err);
       setError(

@@ -26,7 +26,8 @@ function Register() {
         res = await registerRequest(payload);
       }
       localStorage.setItem("isLogin", "true");
-      localStorage.setItem("userId", res.data);
+      localStorage.setItem("userId", res.data[0]);
+      localStorage.setItem("username", res.data[1]);
       console.log(res);
       window.location.href = "/";
     } catch (err: any) {

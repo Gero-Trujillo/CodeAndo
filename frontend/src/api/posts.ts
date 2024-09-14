@@ -3,6 +3,7 @@ import axios from './axios';
 interface Post {
     message: string;
     userId: number;
+    username: string;
 }
 
 export const getPosts = () => axios.get('/posts');
