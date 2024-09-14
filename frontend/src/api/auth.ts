@@ -7,4 +7,5 @@ interface Credentials {
 }
 
 export const loginRequest = (user: Credentials) => axios.post('login', user);
-export const registerRequest = (user: Credentials) => axios.post('register', user); 
+export const registerRequest = (user: Credentials) => axios.post('register', user);
+export const logoutRequest = () => axios.post('logout');

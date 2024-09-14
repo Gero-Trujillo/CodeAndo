@@ -22,14 +22,14 @@ function Register() {
     try {
       if (isLogin) {
         res = await loginRequest(payload);
+        localStorage.setItem("isLogin", "true");
+        localStorage.setItem("userId", res.data[0]);
+        localStorage.setItem("username", res.data[1]);
+        window.location.href = "/";
       } else {
         res = await registerRequest(payload);
-      }
-      localStorage.setItem("isLogin", "true");
-      localStorage.setItem("userId", res.data[0]);
-      localStorage.setItem("username", res.data[1]);
-      console.log(res);
-      window.location.href = "/";
+        window.location.href = "/authPage";
+      } 
     } catch (err: any) {
       setError(err.response.data.message);
     }
