@@ -54,9 +54,7 @@ export const login = async (
     const token = await createAccessToken({ username });
     // Envio del token en la respuesta
     res.cookie("accessToken", token, { httpOnly: true });
-    res.cookie("userId", userId, { httpOnly: true });
-    // Respuesta de exito
-    return res.status(200).json({ message: "User logged in successfully" });
+    res.json(userId);
   } catch (error) {
     // Respuesta de error
     return res.status(500).json({ message: "Error" });
