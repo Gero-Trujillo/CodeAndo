@@ -3,8 +3,14 @@ import { LuHome } from "react-icons/lu";
 import { logoutRequest } from "../api/auth";
 import { BiSolidVideos } from "react-icons/bi";
 import { FaConnectdevelop } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
 function NavPc() {
+  const [userId, setUserId] = useState<number | null>(null);
+  useEffect(() => {
+    const userIdStr = localStorage.getItem("userId");
+    setUserId(parseInt(userIdStr || ""));
+  }, []);
   const logout = async () => {
     try {
       localStorage.clear();
@@ -41,7 +47,7 @@ function NavPc() {
                 <span className="flex gap-2 cursor-pointer">
                   <img
                     className="w-10 h-10 rounded-full bg-[#1c626e]"
-                    src="https://robohash.org/1"
+                    src={`https://robohash.org/${userId}`}
                     alt="avatar"
                   />
                   <h2 className="text-3xl text-[#edfefd]">Profile</h2>

@@ -9,9 +9,12 @@ interface User {
 
 function ProfileDetails() {
   const [user, setUser] = useState<User | null>(null);
+  const [userIdImg, setUserIdImg] = useState<number | null>(null);
   const [error, setError] = useState("");
   useEffect(() => {
     const userId = localStorage.getItem("userId");
+    setUserIdImg(parseInt(userId || ""));
+    
     const fetchUsers = async () => {
       try {
         const res = await getUser(parseInt(userId || ""));
@@ -32,7 +35,7 @@ function ProfileDetails() {
           <div>
             <img
               className="w-36 h-36 bg-[#1c626e] rounded-full"
-              src="https://robohash.org/8"
+              src={`https://robohash.org/${userIdImg}`}
               alt="avatar"
             />
           </div>

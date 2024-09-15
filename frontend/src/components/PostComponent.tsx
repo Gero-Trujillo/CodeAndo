@@ -16,7 +16,7 @@ function PostComponent(props: Props) {
         <div className="w-full flex p-4 gap-2">
           <img
             className="w-16 h-16 rounded-full bg-[#1c626e]"
-            src="https://robohash.org/1"
+            src={`https://robohash.org/${userId}`}
             alt="avatar"
           />
           <div className="flex flex-col gap-2">
