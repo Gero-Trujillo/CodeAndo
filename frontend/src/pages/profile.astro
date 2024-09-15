@@ -4,6 +4,10 @@ import NavPc from "../components/NavPc";
 import Layout from "../layouts/Layout.astro";
 import ProfileDetails from "../components/ProfileDetails";
 import MyPosts from "../components/MyPosts";
+const token = Astro.cookies.get("accessToken")?.value;
+if (!token) {
+  return Astro.redirect("/authPage");
+}
 ---
 
 <Layout title="Profile">
