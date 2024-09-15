@@ -4,6 +4,10 @@ import express from "express";
 import cors from "cors";
 // Importacion de cookie-parser
 import cookieParser from "cookie-parser";
+// Importacion de morgan
+import morgan from "morgan";
+// Importacion de helmet
+import helmet from "helmet";
 // Importacion de las rutas
 import authRoutes from "./routes/auth.routes";
 import postsRoutes from "./routes/posts.routes";
@@ -23,12 +27,14 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(morgan("dev"));
+app.use(helmet());
 
 // Uso de las rutas
 app.use(authRoutes);
 app.use(postsRoutes);
 app.use(commentsRoutes);
-app.use(usersRoutes)
+app.use(usersRoutes);
 
 // Definicion del puerto
 const PORT = 3000;
