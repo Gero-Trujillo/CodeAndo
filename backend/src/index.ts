@@ -2,6 +2,8 @@
 import express from "express";
 //Importacion de CORS
 import cors from "cors";
+// Importacion de cookie-parser
+import cookieParser from "cookie-parser";
 // Importacion de las rutas
 import authRoutes from "./routes/auth.routes";
 import postsRoutes from "./routes/posts.routes";
@@ -20,6 +22,7 @@ app.use(
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 // Uso de las rutas
 app.use(authRoutes);
