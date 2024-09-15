@@ -7,6 +7,7 @@ import {
   createPost,
   deletePost,
   getPostsByUser,
+  updatePost,
 } from "../controllers/posts.controller";
 
 // Instancia de Router
@@ -18,6 +19,7 @@ router.get("/posts/:id", getPost);
 router.post("/posts", createPost);
 router.delete("/posts/:id", deletePost);
 router.get("/posts/user/:id", getPostsByUser);
+router.put("/posts/:id", updatePost);
 
 // Exportacion del router
 export default router;

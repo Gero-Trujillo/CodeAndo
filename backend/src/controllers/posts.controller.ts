@@ -88,3 +88,15 @@ export const getPostsByUser = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Internal server error" });
   }
 }
+
+export const updatePost = async (req: Request, res: Response) => {
+  try {
+    // Datos del body
+    const { username } = req.body;
+    // Consulta a la base de datos
+    const [rows] = await pool.query("UPDATE posts SET username = ? WHERE userId = ?", [username, req.params.id]);
+  } catch (error) {
+    // Error en el servidor
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
