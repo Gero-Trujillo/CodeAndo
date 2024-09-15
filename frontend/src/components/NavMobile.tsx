@@ -1,8 +1,8 @@
 import React from "react";
 import { CiLogout } from "react-icons/ci";
-import { GoPeople, GoPerson } from "react-icons/go";
+import { GoPerson } from "react-icons/go";
 import { LuHome } from "react-icons/lu";
-import Cookies from "js-cookie";
+import { BiSolidVideos } from "react-icons/bi";
 import { logoutRequest } from "../api/auth";
 
 function NavMobile() {
@@ -22,15 +22,21 @@ function NavMobile() {
         <div className="w-full flex flex-col items-center gap-4 py-4">
           <h1 className="text-[#16bcc4] text-4xl font-semibold">CodeAndo</h1>
           <div className="w-full flex items-center justify-center gap-8 text-[#16bcc4] text-4xl">
-            <span>
-              <LuHome />
-            </span>
-            <span>
-              <GoPeople />
-            </span>
-            <span>
-              <GoPerson />
-            </span>
+            <a href="/">
+              <span>
+                <LuHome />
+              </span>
+            </a>
+            <a href="/learning">
+              <span>
+                <BiSolidVideos />
+              </span>
+            </a>
+            <a href="/profile">
+              <span>
+                <GoPerson />
+              </span>
+            </a>
             <span onClick={logout}>
               <CiLogout />
             </span>
