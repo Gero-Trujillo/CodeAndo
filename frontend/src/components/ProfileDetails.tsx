@@ -1,6 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getUser } from "../api/users";
+
+interface User {
+  username: string;
+  country: string;
+  password: string;
+}
 
 function ProfileDetails() {
+  const [user, setUser] = useState<User | null>(null);
+  const [error, setError] = useState("");
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    const fetchUsers = async () => {
+      try {
+        const res = await getUser(parseInt(userId || ""));
+        setUser(res.data[0]);
+      } catch (err: any) {
+        console.error("Error getting users:", err);
+        setError(
+          err.response?.data?.message || "An error occurred while getting users"
+        );
+      }
+    };
+    fetchUsers();
+  }, []);
   return (
     <>
       <section className="w-full">
@@ -14,9 +38,11 @@ function ProfileDetails() {
           </div>
           <div className="flex items-start flex-1">
             <div className="text-2xl text-[#edfefd] flex flex-col gap-2 w-full">
-              <h2>@Username</h2>
-              <p>From: Colombia</p>
-              <button className="bg-[#16bcc4] py-1 rounded-lg md:w-1/4">Edit</button>
+              <h2>@{user?.username}</h2>
+              <p>From: {user?.country}</p>
+              <button className="bg-[#16bcc4] py-1 rounded-lg md:w-1/4">
+                Edit
+              </button>
             </div>
           </div>
         </div>
