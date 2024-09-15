@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PostComponent from "./PostComponent";
+import PostProfileComponent from "./PostProfileComponent";
 import { getPostsByUser } from "../api/posts";
 
 interface Post {
@@ -33,8 +33,9 @@ function MyPosts() {
           .slice()
           .reverse()
           .map((post) => (
-            <PostComponent
+            <PostProfileComponent
               key={post.postId}
+              postId={post.postId}
               message={post.message}
               username={post.username}
               userId={post.userId}
