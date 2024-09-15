@@ -73,7 +73,7 @@ export const getPostsByUser = async (req: Request, res: Response) => {
   try {
     // Consulta a la base de datos
     const [rows] = await pool.query("SELECT * FROM posts WHERE userId = ?", [
-      req.params.userId,
+      req.params.id,
     ]);
     // Respuesta de la API
     if ((rows as any[]).length > 0) {
