@@ -12,7 +12,7 @@ interface UserAuth {
   country: string;
 }
 
-// Definicion de las funciones de registro y login
+// Definicion de la funcion de registro
 export const register = async (
   req: Request<unknown, unknown, UserAuth>,
   res: Response
@@ -33,6 +33,7 @@ export const register = async (
   }
 };
 
+// Definicion de la funcion de login
 export const login = async (
   req: Request<unknown, unknown, UserAuth>,
   res: Response

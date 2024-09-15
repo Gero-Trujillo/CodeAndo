@@ -69,6 +69,7 @@ export const deletePost = async (req: Request, res: Response) => {
   }
 };
 
+// Obtener posts por usuario
 export const getPostsByUser = async (req: Request, res: Response) => {
   try {
     // Consulta a la base de datos
@@ -89,6 +90,7 @@ export const getPostsByUser = async (req: Request, res: Response) => {
   }
 }
 
+// Actualizar un post, solo el username
 export const updatePost = async (req: Request, res: Response) => {
   try {
     // Datos del body
