@@ -3,6 +3,7 @@ import NavMobile from "../components/NavMobile";
 import NavPc from "../components/NavPc";
 import Layout from "../layouts/Layout.astro";
 import VideoComponent from "../components/VideoComponent";
+import videos from "../videos.json"
 const token = Astro.cookies.get("accessToken")?.value;
 if (!token) {
   return Astro.redirect("/authPage");
@@ -13,42 +14,14 @@ if (!token) {
   <section class="w-full lg:hidden">
     <NavMobile client:load />
     <section class="p-2 flex flex-col gap-4">
-      <VideoComponent
-        client:load
-        title="Curso de React principiantes"
-        description="Curso de React para principiantes, donde aprenderas las bases y funcionalidades mas importantes en react para comenzar"
-        url="https://www.youtube.com/watch?v=rLoWMU4L_qE"
-      />
-      <VideoComponent
-        client:load
-        title="Curso de React principiantes"
-        description="Curso de React para principiantes, donde aprenderas las bases y funcionalidades mas importantes en react para comenzar"
-        url="https://www.youtube.com/watch?v=rLoWMU4L_qE"
-      />
-      <VideoComponent
-        client:load
-        title="Curso de React principiantes"
-        description="Curso de React para principiantes, donde aprenderas las bases y funcionalidades mas importantes en react para comenzar"
-        url="https://www.youtube.com/watch?v=rLoWMU4L_qE"
-      />
-      <VideoComponent
-        client:load
-        title="Curso de React principiantes"
-        description="Curso de React para principiantes, donde aprenderas las bases y funcionalidades mas importantes en react para comenzar"
-        url="https://www.youtube.com/watch?v=rLoWMU4L_qE"
-      />
-      <VideoComponent
-        client:load
-        title="Curso de React principiantes"
-        description="Curso de React para principiantes, donde aprenderas las bases y funcionalidades mas importantes en react para comenzar"
-        url="https://www.youtube.com/watch?v=rLoWMU4L_qE"
-      />
-      <VideoComponent
-        client:load
-        title="Curso de React principiantes"
-        description="Curso de React para principiantes, donde aprenderas las bases y funcionalidades mas importantes en react para comenzar"
-        url="https://www.youtube.com/watch?v=rLoWMU4L_qE"
-      />
+      {videos.map((video) => (
+        <VideoComponent
+          client:load
+          title={video.title}
+          description={video.description}
+          url={video.url}
+        />
+      ))}
     </section>
   </section>
 
@@ -59,42 +32,13 @@ if (!token) {
     <div
       class="flex flex-col flex-1 px-20 xl:px-40 2xl:px-60 gap-4 overflow-y-auto scrollbar-hide"
     >
+    {videos.map((video) => (
       <VideoComponent
         client:load
-        title="Curso de React principiantes"
-        description="Curso de React para principiantes, donde aprenderas las bases y funcionalidades mas importantes en react para comenzar"
-        url="https://www.youtube.com/watch?v=rLoWMU4L_qE"
+        title={video.title}
+        description={video.description}
+        url={video.url}
       />
-      <VideoComponent
-        client:load
-        title="Curso de React principiantes"
-        description="Curso de React para principiantes, donde aprenderas las bases y funcionalidades mas importantes en react para comenzar"
-        url="https://www.youtube.com/watch?v=rLoWMU4L_qE"
-      />
-      <VideoComponent
-        client:load
-        title="Curso de React principiantes"
-        description="Curso de React para principiantes, donde aprenderas las bases y funcionalidades mas importantes en react para comenzar"
-        url="https://www.youtube.com/watch?v=rLoWMU4L_qE"
-      />
-      <VideoComponent
-        client:load
-        title="Curso de React principiantes"
-        description="Curso de React para principiantes, donde aprenderas las bases y funcionalidades mas importantes en react para comenzar"
-        url="https://www.youtube.com/watch?v=rLoWMU4L_qE"
-      />
-      <VideoComponent
-        client:load
-        title="Curso de React principiantes"
-        description="Curso de React para principiantes, donde aprenderas las bases y funcionalidades mas importantes en react para comenzar"
-        url="https://www.youtube.com/watch?v=rLoWMU4L_qE"
-      />
-      <VideoComponent
-        client:load
-        title="Curso de React principiantes"
-        description="Curso de React para principiantes, donde aprenderas las bases y funcionalidades mas importantes en react para comenzar"
-        url="https://www.youtube.com/watch?v=rLoWMU4L_qE"
-      />
-    </div>
+    ))}
   </section>
 </Layout>
