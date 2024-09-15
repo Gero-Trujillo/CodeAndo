@@ -1,21 +1,30 @@
-import React from "react";
+// Importacion de iconos
 import { CiLogout } from "react-icons/ci";
 import { GoPerson } from "react-icons/go";
 import { LuHome } from "react-icons/lu";
 import { BiSolidVideos } from "react-icons/bi";
+// Importacion de funciones API
 import { logoutRequest } from "../api/auth";
 
+// Definicion de componente NavMobile
 function NavMobile() {
+  // Funcion para logout
   const logout = async () => {
     try {
+      // Limpieza de localStorage
       localStorage.clear();
+      // Llamada a la funcion logoutRequest de la API
       const res = await logoutRequest();
+      // Redireccion a la pagina de autenticacion
       window.location.href = "/authPage";
+      // Log de respuesta
       console.log(res);
     } catch (error) {
+      // Manejo de errores
       console.log(error);
     }
   };
+  // Retorno del componente
   return (
     <>
       <nav className="w-full bg-[#0d363f] border-b-2 border-[#edfefd] sticky top-0">
@@ -47,4 +56,5 @@ function NavMobile() {
   );
 }
 
+// Exportacion de componente
 export default NavMobile;

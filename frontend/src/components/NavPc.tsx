@@ -1,26 +1,41 @@
+// Importacion Iconos
 import { CiLogout } from "react-icons/ci";
 import { LuHome } from "react-icons/lu";
-import { logoutRequest } from "../api/auth";
 import { BiSolidVideos } from "react-icons/bi";
 import { FaConnectdevelop } from "react-icons/fa";
+// Importacion de UseEffect y UseState
 import { useEffect, useState } from "react";
+// Importacion de funciones API
+import { logoutRequest } from "../api/auth";
 
+// Definicion de componente NavPc
 function NavPc() {
+  // Definicion de estado userId
   const [userId, setUserId] = useState<number | null>(null);
+  // UseEffect para obtener userId de localStorage
   useEffect(() => {
+    // Obtencion de userId de localStorage
     const userIdStr = localStorage.getItem("userId");
+    // Asignacion de userId a estado userId
     setUserId(parseInt(userIdStr || ""));
   }, []);
+  // Funcion para logout
   const logout = async () => {
     try {
+      // Limpieza de localStorage
       localStorage.clear();
+      // Llamada a la funcion logoutRequest de la API
       const res = await logoutRequest();
+      // Redireccion a la pagina de autenticacion
       window.location.href = "/authPage";
+      // Log de respuesta
       console.log(res);
     } catch (error) {
+      // Manejo de errores
       console.log(error);
     }
   };
+  // Retorno del componente
   return (
     <>
       <nav className="w-full bg-[#0d363f] rounded-xl h-full">
@@ -70,4 +85,5 @@ function NavPc() {
   );
 }
 
+// Exportacion de componente NavPc
 export default NavPc;

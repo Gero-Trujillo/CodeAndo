@@ -1,15 +1,19 @@
+// Importacion de axios.ts
 import axios from './axios';
 
+// Definicion de interfaz Post
 interface Post {
     message: string;
     userId: number;
     username: string;
 }
 
+// Definicion de interfaz PostEdit
 interface PostEdit{
     username: string;
 }
 
+// Exportacion de funciones API
 export const getPosts = () => axios.get('/posts');
 export const createPost = (post: Post) => axios.post('/posts', post);
 export const deletePost = (postId: number) => axios.delete(`/posts/${postId}`);

@@ -1,6 +1,7 @@
-import React from 'react'
+// Importacion de componente AuthComponent
 import AuthComponent from '../components/AuthComponent'
 
+// Definicion de componente AuthPage
 function AuthPage() {
   return (
     <>
@@ -9,4 +10,5 @@ function AuthPage() {
   )
 }
 
+// Exportacion de componente AuthPage
 export default AuthPage

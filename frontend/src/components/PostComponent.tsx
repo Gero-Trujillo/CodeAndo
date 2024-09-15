@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { FaComment, FaHeart } from "react-icons/fa";
-import { getPosts } from "../api/posts";
 
+// Interface para props
 interface Props{
   username: string;
   message: string;
   userId: number;
 }
 
+// Componente de Post
 function PostComponent(props: Props) {
+  // Obtencion de propiedades
   const { username, message, userId } = props;
+  // Retorno del componente
   return (
     <>
       <section className="w-full bg-[#0d363f] rounded-xl">
@@ -31,4 +32,5 @@ function PostComponent(props: Props) {
   );
 }
 
+// Exportacion de componente
 export default PostComponent;

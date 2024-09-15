@@ -1,19 +1,25 @@
 ---
+// Importaciones de Layout y componentes
 import NavMobile from "../components/NavMobile";
 import NavPc from "../components/NavPc";
 import Layout from "../layouts/Layout.astro";
 import VideoComponent from "../components/VideoComponent";
+// Importación de videos JSON
 import videos from "../videos.json"
+// Recuperar el token de la cookie
 const token = Astro.cookies.get("accessToken")?.value;
+// Si no hay token, redirigir a la página de autenticación
 if (!token) {
   return Astro.redirect("/authPage");
 }
 ---
 
 <Layout title="Learning">
+  <!-- Vista Mobile -->
   <section class="w-full lg:hidden">
     <NavMobile client:load />
     <section class="p-2 flex flex-col gap-4">
+      <!-- Mapeo de videos -->
       {videos.map((video) => (
         <VideoComponent
           client:load
@@ -25,6 +31,7 @@ if (!token) {
     </section>
   </section>
 
+  <!-- Vista PC -->
   <section class="hidden w-full h-screen p-8 lg:flex">
     <div class="w-1/4">
       <NavPc client:load />
@@ -32,6 +39,7 @@ if (!token) {
     <div
       class="flex flex-col flex-1 px-20 xl:px-40 2xl:px-60 gap-4 overflow-y-auto scrollbar-hide"
     >
+    <!-- Mapeo de videos -->
     {videos.map((video) => (
       <VideoComponent
         client:load

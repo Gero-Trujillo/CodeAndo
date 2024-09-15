@@ -1,14 +1,18 @@
-import React from "react";
+// Importacion de React Player
 import ReactPlayer from "react-player/youtube";
 
+// Definicion de interfaz Props
 interface Props {
   url: string;
   title: string;
   description: string;
 }
 
+// Definicion de componente VideoComponent
 function VideoComponent(props: Props) {
+  // Obtencion de propiedades
   const { url, title, description } = props;
+  // Retorno del componente
   return (
     <>
       <div className="w-full flex flex-col bg-[#0d363f] rounded-xl md:flex-row">
@@ -24,4 +28,5 @@ function VideoComponent(props: Props) {
   );
 }
 
+// Exportacion de componente VideoComponent
 export default VideoComponent;
