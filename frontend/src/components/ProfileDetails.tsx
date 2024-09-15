@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getUser, updateUser } from "../api/users";
 import { RxCrossCircled } from "react-icons/rx";
+import { updatePost } from "../api/posts";
 
 interface User {
   username: string;
@@ -23,10 +24,16 @@ function ProfileDetails() {
     e.preventDefault();
     const payload = { username, country, password };
     let res: any;
+    let res2: any;
     try {
       res = await updateUser(parseInt(localStorage.getItem("userId") || ""), payload);
       localStorage.setItem("username", username);
       window.location.reload();
+      try {
+        res2 = await updatePost(parseInt(localStorage.getItem("userId") || ""), { username });
+      } catch (error) {
+        console.log(error)
+      }
     } catch (error) {
       console.log(error);
     }
