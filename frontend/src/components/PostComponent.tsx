@@ -24,16 +24,6 @@ function PostComponent(props: Props) {
               {message}
             </h1>
             <p className="text-[#16bcc4] text-lg">@{username}</p>
-            <div className="flex gap-2">
-              <button className="text-2xl flex gap-1 items-center">
-                <FaHeart className="text-white" />
-                <span className="text-lg text-[#edfefd]">5</span>
-              </button>
-              <button className="text-2xl flex items-center gap-1">
-                <FaComment className="text-white" />
-                <span className="text-lg text-[#edfefd]">3</span>
-              </button>
-            </div>
           </div>
         </div>
       </section>

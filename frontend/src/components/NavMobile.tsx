@@ -18,7 +18,7 @@ function NavMobile() {
   };
   return (
     <>
-      <nav className="w-full bg-[#0d363f] border-b-2 border-[#edfefd]">
+      <nav className="w-full bg-[#0d363f] border-b-2 border-[#edfefd] sticky top-0">
         <div className="w-full flex flex-col items-center gap-4 py-4">
           <h1 className="text-[#16bcc4] text-4xl font-semibold">CodeAndo</h1>
           <div className="w-full flex items-center justify-center gap-8 text-[#16bcc4] text-4xl">
