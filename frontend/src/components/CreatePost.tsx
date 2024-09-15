@@ -64,7 +64,7 @@ function CreatePost() {
         <div className="w-full flex gap-2 p-4">
           <img
             className="w-16 h-16 bg-[#1c626e] rounded-full"
-            src="https://robohash.org/1"
+            src={`https://robohash.org/${userId}`}
             alt="avatar"
           />
           <div className="flex flex-col w-full gap-4">
