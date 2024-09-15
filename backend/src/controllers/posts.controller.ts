@@ -68,3 +68,23 @@ export const deletePost = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+export const getPostsByUser = async (req: Request, res: Response) => {
+  try {
+    // Consulta a la base de datos
+    const [rows] = await pool.query("SELECT * FROM posts WHERE userId = ?", [
+      req.params.userId,
+    ]);
+    // Respuesta de la API
+    if ((rows as any[]).length > 0) {
+      // Si hay posts
+      res.json(rows);
+    } else {
+      // Si no hay posts
+      res.status(404).json({ message: "No posts found" });
+    }
+  } catch (error) {
+    // Error en el servidor
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
