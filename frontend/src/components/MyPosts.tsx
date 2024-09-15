@@ -3,7 +3,7 @@ import PostProfileComponent from "./PostProfileComponent";
 import { getPostsByUser } from "../api/posts";
 
 interface Post {
-  postId: number;
+  id: number;
   message: string;
   userId: number;
   username: string;
@@ -34,8 +34,8 @@ function MyPosts() {
           .reverse()
           .map((post) => (
             <PostProfileComponent
-              key={post.postId}
-              postId={post.postId}
+              key={post.id}
+              postId={post.id}
               message={post.message}
               username={post.username}
               userId={post.userId}

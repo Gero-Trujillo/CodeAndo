@@ -6,7 +6,7 @@ import NavPc from "../components/NavPc";
 import { getPosts } from "../api/posts";
 
 interface Post {
-  postId: number;
+  id: number;
   message: string;
   userId: number;
   username: string;
@@ -36,7 +36,7 @@ function HomePage() {
           <CreatePost />
           {posts.slice().reverse().map((post) => (
             <PostComponent
-              key={post.postId}
+              key={post.id}
               message={post.message}
               username={post.username}
               userId={post.userId}
@@ -53,7 +53,7 @@ function HomePage() {
           <CreatePost />
           {posts.slice().reverse().map((post) => (
             <PostComponent
-              key={post.postId}
+              key={post.id}
               message={post.message}
               username={post.username}
               userId={post.userId}
