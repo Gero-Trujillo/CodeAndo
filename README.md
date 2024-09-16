@@ -62,3 +62,10 @@ Asegúrate de tener instalados los siguientes programas en tu máquina:
     Utiliza el comando: 
     ```sh
     docker-compose --build
+
+## Futuras actulizaciones
+   En un futuro se planea realizar actualizaciones, en principio se tienen pendientes algunas las cuales son:
+   - **Ver perfil de otros usuarios**
+   - **Comentarios en las publicaciones**
+   - **Likes en las publicaciones**
+   - **Poder poner foto de perfil**
