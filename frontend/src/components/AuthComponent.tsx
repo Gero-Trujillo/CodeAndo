@@ -1,40 +1,64 @@
+// Importacion de React y useState
 import React, { useState } from "react";
+// Importacion de motion y AnimatePresence
 import { motion, AnimatePresence } from "framer-motion";
+// Importacion de funciones API
 import { loginRequest, registerRequest } from "../api/auth";
 
+// Definicion de componente Register
 function Register() {
+  // Definicion de estados
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [country, setCountry] = useState("");
   const [error, setError] = useState("");
+  // Funcion para manejar el cambio de estado de isLogin
   const handleLogin = () => setIsLogin(!isLogin);
+  // Variante de animacion
   const variants = {
     hidden: { opacity: 0, y: 200 },
     visible: { opacity: 1, y: 0 },
     exit: { opacity: 0, y: -200 },
   };
+  // Funcion para manejar el envio del formulario
   const handleSubmit = async (e: React.FormEvent) => {
+    // Previene el comportamiento por defecto
     e.preventDefault();
+    // Limpieza de estado de error
     setError("");
+    // Creacion de payload
     const payload = { username, password, country };
+    // Init de variable
     let res: any;
     try {
+      // Comprobacion de isLogin para saber si esta en el form de login o registro
       if (isLogin) {
+        // Llamada a la funcion loginRequest de la API
         res = await loginRequest(payload);
+        // Actualizacion de localStorage
+        localStorage.setItem("isLogin", "true");
+        localStorage.setItem("userId", res.data[0]);
+        localStorage.setItem("username", res.data[1]);
+        // Redireccion a la pagina principal
+        window.location.href = "/";
       } else {
+        // Llamada a la funcion registerRequest de la API
         res = await registerRequest(payload);
-      }
-      console.log(res);
+        // Actualizacion de localStorage
+        window.location.href = "/authPage";
+      } 
     } catch (err: any) {
+      // Manejo de errores
       setError(err.response.data.message);
     }
   };
 
+  // Retorno del componente
   return (
     <>
       <AnimatePresence mode="wait">
-        {isLogin ? (
+        {isLogin ?  (
           <motion.section
             className="w-full h-screen flex justify-center items-center"
             key={isLogin ? "singin" : "singup"}
