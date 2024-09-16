@@ -59,4 +59,6 @@ Asegúrate de tener instalados los siguientes programas en tu máquina:
    git clone https://github.com/tu-usuario/codeando.git
    cd codeando
 2. **Contruir el proyecto en Docker**
-    Utiliza el comando: docker-compose --build
+    Utiliza el comando: 
+    ```sh
+    docker-compose --build
