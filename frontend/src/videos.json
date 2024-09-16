@@ -1,0 +1,22 @@
+[
+  {
+    "title": "JavaScript para React",
+    "description": "Aprende JavaScript desde lo basico hasta lo necesario para trabajar con React.",
+    "url": "https://www.youtube.com/watch?v=lVqHiTCIRQg"
+  },
+  {
+    "title": "Curso React",
+    "description": "Aprende lo primordial para comenzar a trabajar con React y crear aplicaciones web interactivas y dinámicas.",
+    "url": "https://www.youtube.com/watch?v=rLoWMU4L_qE"
+  },
+  {
+    "title": "Curso NodeJS",
+    "description": "Aprende JavaScript del lado del servidor con NodeJS, aprende a crear aplicaciones web con JavaScript en el servidor, aplicaiones que no requieren del navegador para funcionar.",
+    "url": "https://www.youtube.com/watch?v=i3OdKwuBjeM"
+  },
+  {
+    "title": "Curso ExpressJS",
+    "description": "Aprende a crear aplicaciones web con ExpressJS, un framework de NodeJS para crear aplicaciones web de manera rápida y sencilla con JavaScript del lado del servidor.",
+    "url": "https://www.youtube.com/watch?v=JmJ1WUoUIK4"
+  }
+]
