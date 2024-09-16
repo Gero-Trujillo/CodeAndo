@@ -12,7 +12,7 @@ interface UserAuth {
   country: string;
 }
 
-// Definicion de las funciones de registro y login
+// Definicion de la funcion de registro
 export const register = async (
   req: Request<unknown, unknown, UserAuth>,
   res: Response
@@ -21,11 +21,10 @@ export const register = async (
     // Obtencion de los datos del body
     const { username, password, country } = req.body;
     // Insercion de los datos en la base de datos
-    await pool.query("INSERT INTO users (username, password, country) VALUES(?,?,?)", [
-      username,
-      password,
-      country,
-    ]);
+    await pool.query(
+      "INSERT INTO users (username, password, country) VALUES(?,?,?)",
+      [username, password, country]
+    );
     // Respuesta de exito
     return res.status(200).json({ message: "User registered successfully" });
   } catch (error) {
@@ -34,6 +33,7 @@ export const register = async (
   }
 };
 
+// Definicion de la funcion de login
 export const login = async (
   req: Request<unknown, unknown, UserAuth>,
   res: Response
@@ -42,20 +42,20 @@ export const login = async (
     // Obtencion de los datos del body
     const { username, password } = req.body;
     // Consulta de los datos en la base de datos
-    const [rows] = await pool.query("SELECT * FROM users WHERE username = ? AND password = ?", [
-      username,
-      password,
-    ]);
+    const [rows] = await pool.query(
+      "SELECT * FROM users WHERE username = ? AND password = ?",
+      [username, password]
+    );
     // Validacion de los datos
     if ((rows as any[]).length === 0) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
+    const userId = (rows as any[])[0].idUser;
     // Creacion del token de acceso
     const token = await createAccessToken({ username });
     // Envio del token en la respuesta
     res.cookie("accessToken", token, { httpOnly: true });
-    // Respuesta de exito
-    return res.status(200).json({ message: "User logged in successfully" });
+    res.json([userId, username]);
   } catch (error) {
     // Respuesta de error
     return res.status(500).json({ message: "Error" });

@@ -8,9 +8,9 @@ let pool: Pool;
 (async () => {
   try {
     pool = createPool({
-      host: "localhost",
+      host: "db",
       user: "root",
-      password: "",
+      password: "12345",
       database: "codeando",
       port: 3306,
     });

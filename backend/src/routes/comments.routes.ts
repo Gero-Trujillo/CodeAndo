@@ -7,15 +7,16 @@ import {
   createComment,
   deleteComment,
 } from "../controllers/comments.controller";
+import { authRequired } from "../middlewares/validateToken";
 
 // Crear una instancia de Router
 const router = Router();
 
 // Rutas de la API
-router.get("/comments", getComments);
-router.get("/comments/:id", getComment);
-router.post("/comments", createComment);
-router.delete("/comments/:id", deleteComment);
+router.get("/comments", authRequired, getComments);
+router.get("/comments/:id", authRequired, getComment);
+router.post("/comments", authRequired, createComment);
+router.delete("/comments/:id", authRequired, deleteComment);
 
 // Exportar el router
 export default router;

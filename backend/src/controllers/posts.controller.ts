@@ -20,6 +20,7 @@ export const getPosts = async (req: Request, res: Response) => {
     }
   } catch (error) {
     // Error en el servidor
+    console.log(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -35,6 +36,7 @@ export const getPost = async (req: Request, res: Response) => {
     res.json(rows);
   } catch (error) {
     // Error en el servidor
+    console.log(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -43,9 +45,9 @@ export const getPost = async (req: Request, res: Response) => {
 export const createPost = async (req: Request, res: Response) => {
   try {
     // Datos del body
-    const { message, userId } = req.body;
+    const { message, userId, username } = req.body;
     // Consulta a la base de datos
-    const [rows] = await pool.query("INSERT INTO posts (message, userId) VALUES(?,?)", [message, userId]);
+    const [rows] = await pool.query("INSERT INTO posts (message, userId, username) VALUES(?,?,?)", [message, userId, username]);
     // Respuesta de la API
     res.json({ message: "Post created successfully" });
   } catch (error) {
@@ -68,3 +70,37 @@ export const deletePost = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+// Obtener posts por usuario
+export const getPostsByUser = async (req: Request, res: Response) => {
+  try {
+    // Consulta a la base de datos
+    const [rows] = await pool.query("SELECT * FROM posts WHERE userId = ?", [
+      req.params.id,
+    ]);
+    // Respuesta de la API
+    if ((rows as any[]).length > 0) {
+      // Si hay posts
+      res.json(rows);
+    } else {
+      // Si no hay posts
+      res.status(404).json({ message: "No posts found" });
+    }
+  } catch (error) {
+    // Error en el servidor
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+// Actualizar un post, solo el username
+export const updatePost = async (req: Request, res: Response) => {
+  try {
+    // Datos del body
+    const { username } = req.body;
+    // Consulta a la base de datos
+    const [rows] = await pool.query("UPDATE posts SET username = ? WHERE userId = ?", [username, req.params.id]);
+  } catch (error) {
+    // Error en el servidor
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
