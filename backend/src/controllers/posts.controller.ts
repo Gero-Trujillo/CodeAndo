@@ -20,6 +20,7 @@ export const getPosts = async (req: Request, res: Response) => {
     }
   } catch (error) {
     // Error en el servidor
+    console.log(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -35,6 +36,7 @@ export const getPost = async (req: Request, res: Response) => {
     res.json(rows);
   } catch (error) {
     // Error en el servidor
+    console.log(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
