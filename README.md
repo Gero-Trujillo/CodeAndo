@@ -61,7 +61,7 @@ Asegúrate de tener instalados los siguientes programas en tu máquina:
 2. **Contruir el proyecto en Docker**
     Utiliza el comando: 
     ```sh
-    docker-compose --build
+    docker-compose up --build
 
 ## Futuras actulizaciones
    En un futuro se planea realizar actualizaciones, en principio se tienen pendientes algunas las cuales son:
