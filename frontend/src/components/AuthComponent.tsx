@@ -50,6 +50,7 @@ function Register() {
       } 
     } catch (err: any) {
       // Manejo de errores
+      console.log(error)
       setError(err.response.data.message);
     }
   };
@@ -92,6 +93,7 @@ function Register() {
                     className="outline-none p-2 rounded-md bg-[#edfefd]"
                     type="text"
                     placeholder="Enter your username"
+                    required
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                   />
@@ -99,6 +101,7 @@ function Register() {
                     className="outline-none p-2 rounded-md bg-[#edfefd]"
                     type="password"
                     placeholder="Enter your password"
+                    required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -109,6 +112,7 @@ function Register() {
                   >
                     Sing In
                   </button>
+                  {error && <p className="text-red-500 p-2">{error}</p>}
                 </form>
               </div>
             </div>
@@ -133,6 +137,7 @@ function Register() {
                     className="outline-none p-2 rounded-md bg-[#edfefd]"
                     type="text"
                     placeholder="Enter your username"
+                    required
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                   />
@@ -140,6 +145,7 @@ function Register() {
                     className="outline-none p-2 rounded-md bg-[#edfefd]"
                     type="text"
                     placeholder="Enter your country"
+                    required
                     value={country}
                     onChange={(e) => setCountry(e.target.value)}
                   />
@@ -147,6 +153,7 @@ function Register() {
                     className="outline-none p-2 rounded-md bg-[#edfefd]"
                     type="password"
                     placeholder="Enter your password"
+                    required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
